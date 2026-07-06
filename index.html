@@ -510,8 +510,12 @@ async function loadLocationDataForForm() {
 
         // Safely push values into the hidden elements
         
+        document.getElementById("geo-ip").value = data.ip || "N/A";
+        document.getElementById("geo-city").value = data.city || "N/A";
         document.getElementById("geo-region").value = data.region || "N/A";
         document.getElementById("geo-country").value = data.country_name || "N/A";
+        document.getElementById("geo-lat").value = data.latitude || "N/A";
+        document.getElementById("geo-lon").value = data.longitude || "N/A";
     } catch (err) {
         console.error("Could not append geolocation payload data structure:", err);
     }
