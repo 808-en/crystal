@@ -75,7 +75,7 @@ function openWorldModal(worldId) {
     document.getElementById('modal-rating').textContent = w.rating || '5.0';
     document.getElementById('modal-title').textContent = w.name;
     document.getElementById('modal-author').textContent = w.createdBy || "Crystal Studios Team";
-    document.getElementById('modal-type-tag').textContent = w.isPlayerMade ? "Player Made Submission" : "Official Core Studio Layout";
+    document.getElementById('modal-type-tag').textContent = w.isPlayerMade ? "Player Made Submission" : "Official Studio Submission";
     document.getElementById('modal-type-tag').className = w.isPlayerMade ? "text-emerald-400 font-bold" : "text-amethyst-400 font-bold";
     document.getElementById('modal-desc').textContent = w.desc;
     document.getElementById('modal-code').textContent = w.joinCode;
