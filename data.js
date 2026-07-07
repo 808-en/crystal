@@ -1,6 +1,6 @@
 const SITE_DATA = {
   "alerts": {
-    "message": "Welcome to Crystal Studios! Current version: 1.89 Beta Pre-Release.",
+    "message": "Welcome to Crystal Studios! Current version: 1.98 Beta.",
     "icon": "fa-solid fa-bullhorn",
     "enabled": true,
     "expiresAt": 1882939600000
@@ -37,10 +37,27 @@ const SITE_DATA = {
       "joinCode": "schoolboyranaway",
       "createdBy": "sticky_tape",
       "isPlayerMade": true
+    },
+    {
+      "id": "warzone",
+      "name": "WarZone",
+      "category": "survival",
+      "icon": "fa-solid fa-skull",
+      "gradient": "from-emerald-900 to-teal-950",
+      "tag": "",
+      "tagColor": "",
+      "badge": "Survival",
+      "badgeColor": "bg-emerald-950/50 border-emerald-800/30 text-emerald-400",
+      "desc": "Win fame and glory in this military war game. With multiple weapons, tools, ranks, and beautiful maps, this is the perfect shooting game!  COMING JULY 15",
+      "rating": "4.5",
+      "joinCode": "Coming Soon",
+      "createdBy": "Entity1234",
+      "isPlayerMade": false
     }
   ]
 };
-// I don't think I need this...
+
+
 if (localStorage.getItem("cs_local_data")) {
     try {
         const localData = JSON.parse(localStorage.getItem("cs_local_data"));
