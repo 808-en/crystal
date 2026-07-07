@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sitemap - Crystal Studios</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        amethyst: { 400: '#c191f2', 500: '#9d4edd', 600: '#8b3ec4', 700: '#722da1', 800: '#5a189a', 900: '#3c096c', 950: '#10051d' }
+                    },
+                    fontFamily: { sans: ['Inter', 'sans-serif'], display: ['Space Grotesk', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #10051d; }
+        ::-webkit-scrollbar-thumb { background: #5a189a; border-radius: 3px; }
+    </style>
+</head>
+<body class="bg-amethyst-950 text-slate-100 font-sans min-h-screen flex flex-col">
+
+    <header class="sticky top-0 z-50 backdrop-blur-md bg-amethyst-950/80 border-b border-amethyst-900/40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-20">
+            <div class="flex items-center gap-3 cursor-pointer" onclick="window.location.href='index.html'">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amethyst-500 to-amethyst-900 flex items-center justify-center shadow-lg shadow-amethyst-500/20">
+                    <i class="fa-solid fa-gem text-lg text-white"></i>
+                </div>
+                <div>
+                    <span class="font-display font-bold text-lg tracking-wider">CRYSTAL</span>
+                    <p class="text-[9px] text-amethyst-400 uppercase tracking-widest font-semibold">STUDIOS</p>
+                </div>
+            </div>
+
+            <nav class="hidden md:flex items-center gap-1">
+                <a href="index.html" class="px-3 py-2 text-sm font-medium text-slate-300 hover:text-white">Home</a>
+                <a href="sitemap.html" class="px-3 py-2 text-sm font-medium text-amethyst-400 border-b-2 border-amethyst-400">Sitemap</a>
+            </nav>
+
+            <button onclick="window.history.back()" class="md:hidden p-2 text-slate-400">
+                <i class="fa-solid fa-arrow-left text-xl"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        <section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Page Title -->
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <h1 class="font-display font-extrabold text-4xl sm:text-5xl text-white mb-4">Site Navigation</h1>
+                <p class="text-slate-300 text-lg">Explore all pages and sections available on Crystal Studios.</p>
+            </div>
+
+            <!-- Main Pages -->
+            <div class="bg-amethyst-900/10 border border-amethyst-900/40 rounded-2xl p-8 shadow-lg mb-12">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-12 h-12 rounded-xl bg-amethyst-600/20 flex items-center justify-center">
+                        <i class="fa-solid fa-house text-xl text-amethyst-400"></i>
+                    </div>
+                    <h2 class="font-display font-bold text-2xl text-white">Main Pages</h2>
+                </div>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <a href="index.html" class="p-4 bg-amethyst-950/50 border border-amethyst-900/40 hover:border-amethyst-500/60 rounded-xl transition-colors group">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="font-semibold text-slate-100 group-hover:text-amethyst-400 transition-colors">Home</h3>
+                            <i class="fa-solid fa-arrow-right text-amethyst-400 opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                        </div>
+                        <p class="text-xs text-slate-400">Main landing page featuring our lobbies and team information</p>
+                    </a>
+
+                    <a href="info.html" class="p-4 bg-amethyst-950/50 border border-amethyst-900/40 hover:border-amethyst-500/60 rounded-xl transition-colors group">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="font-semibold text-slate-100 group-hover:text-amethyst-400 transition-colors">Information</h3>
+                            <i class="fa-solid fa-arrow-right text-amethyst-400 opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                        </div>
+                        <p class="text-xs text-slate-400">Detailed information about our studio and technology stack</p>
+                    </a>
+
+                    <a href="sitemap.html" class="p-4 bg-amethyst-950/50 border border-amethyst-900/40 hover:border-amethyst-500/60 rounded-xl transition-colors group">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="font-semibold text-slate-100 group-hover:text-amethyst-400 transition-colors">Sitemap (This Page)</h3>
+                            <i class="fa-solid fa-arrow-right text-amethyst-400 opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                        </div>
+                        <p class="text-xs text-slate-400">Navigate all pages and sections on Crystal Studios</p>
+                    </a>
+
+                    <a href="sitemap.xml" class="p-4 bg-amethyst-950/50 border border-amethyst-900/40 hover:border-amethyst-500/60 rounded-xl transition-colors group">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="font-semibold text-slate-100 group-hover:text-amethyst-400 transition-colors">XML Sitemap</h3>
+                            <i class="fa-solid fa-arrow-right text-amethyst-400 opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                        </div>
+                        <p class="text-xs text-slate-400">Machine-readable sitemap for search engines</p>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Legal & Policy Pages -->
+            <div class="bg-amethyst-900/10 border border-amethyst-900/40 rounded-2xl p-8 shadow-lg mb-12">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-12 h-12 rounded-xl bg-amethyst-600/20 flex items-center justify-center">
+                        <i class="fa-solid fa-scale-balanced text-xl text-amethyst-400"></i>
+                    </div>
+                    <h2 class="font-display font-bold text-2xl text-white">Legal & Policies</h2>
+                </div>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <a href="termsofservice.html" class="p-4 bg-amethyst-950/50 border border-amethyst-900/40 hover:border-amethyst-500/60 rounded-xl transition-colors group">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="font-semibold text-slate-100 group-hover:text-amethyst-400 transition-colors">Terms of Service</h3>
+                            <i class="fa-solid fa-arrow-right text-amethyst-400 opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                        </div>
+                        <p class="text-xs text-slate-400">Our service terms and conditions including codebase composition</p>
+                    </a>
+
+                    <a href="termsofuse.txt" class="p-4 bg-amethyst-950/50 border border-amethyst-900/40 hover:border-amethyst-500/60 rounded-xl transition-colors group">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="font-semibold text-slate-100 group-hover:text-amethyst-400 transition-colors">Terms of Use</h3>
+                            <i class="fa-solid fa-arrow-right text-amethyst-400 opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                        </div>
+                        <p class="text-xs text-slate-400">Guidelines for using Crystal Studios services</p>
+                    </a>
+
+                    <a href="privacypolicy.txt" class="p-4 bg-amethyst-950/50 border border-amethyst-900/40 hover:border-amethyst-500/60 rounded-xl transition-colors group">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="font-semibold text-slate-100 group-hover:text-amethyst-400 transition-colors">Privacy Policy</h3>
+                            <i class="fa-solid fa-arrow-right text-amethyst-400 opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                        </div>
+                        <p class="text-xs text-slate-400">How we handle and protect your personal information</p>
+                    </a>
+                </div>
+            </div>
+
+            <!-- In-Page Sections -->
+            <div class="bg-amethyst-900/10 border border-amethyst-900/40 rounded-2xl p-8 shadow-lg">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-12 h-12 rounded-xl bg-amethyst-600/20 flex items-center justify-center">
+                        <i class="fa-solid fa-map text-xl text-amethyst-400"></i>
+                    </div>
+                    <h2 class="font-display font-bold text-2xl text-white">In-Page Sections</h2>
+                </div>
+                <div class="space-y-3">
+                    <div class="p-4 bg-amethyst-950/50 border border-amethyst-900/40 rounded-xl">
+                        <h3 class="font-semibold text-slate-100 mb-2 flex items-center gap-2">
+                            <i class="fa-solid fa-gamepad text-amethyst-400"></i> Home Page Sections
+                        </h3>
+                        <ul class="text-xs text-slate-400 space-y-1 ml-6 list-disc">
+                            <li><span class="text-amethyst-300 font-semibold">Home</span> - Welcome and studio overview</li>
+                            <li><span class="text-amethyst-300 font-semibold">Lobbies</span> - Browse all custom game worlds</li>
+                            <li><span class="text-amethyst-300 font-semibold">Our Team</span> - Meet the creators and developers</li>
+                            <li><span class="text-amethyst-300 font-semibold">Apply</span> - Join the Crystal Studios team</li>
+                            <li><span class="text-amethyst-300 font-semibold">Alerts</span> - System broadcasts and announcements</li>
+                            <li><span class="text-amethyst-300 font-semibold">Admin Portal</span> - Administrative management tools</li>
+                        </ul>
+                    </div>
+
+                    <div class="p-4 bg-amethyst-950/50 border border-amethyst-900/40 rounded-xl">
+                        <h3 class="font-semibold text-slate-100 mb-2 flex items-center gap-2">
+                            <i class="fa-solid fa-info text-amethyst-400"></i> Information Page Sections
+                        </h3>
+                        <ul class="text-xs text-slate-400 space-y-1 ml-6 list-disc">
+                            <li><span class="text-amethyst-300 font-semibold">About Us</span> - Who we are and our mission</li>
+                            <li><span class="text-amethyst-300 font-semibold">Technology Stack</span> - Tools and frameworks we use</li>
+                            <li><span class="text-amethyst-300 font-semibold">Repository Details</span> - GitHub repo information</li>
+                            <li><span class="text-amethyst-300 font-semibold">Team Structure</span> - Our organization and roles</li>
+                            <li><span class="text-amethyst-300 font-semibold">Website Features</span> - Capabilities and functionality</li>
+                            <li><span class="text-amethyst-300 font-semibold">Legal Information</span> - Disclaimers and notices</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="mt-12 p-6 bg-amethyst-900/30 border border-amethyst-500/30 rounded-2xl text-center">
+                <h3 class="font-display font-bold text-white mb-4">External Resources</h3>
+                <div class="flex flex-wrap gap-3 justify-center">
+                    <a href="https://bloxd.io" target="_blank" class="px-4 py-2 bg-amethyst-600 hover:bg-amethyst-500 text-white text-xs font-bold rounded-lg transition-colors flex items-center gap-2">
+                        <i class="fa-solid fa-globe"></i> Bloxd.io
+                    </a>
+                    <a href="https://bloxdhub.com" target="_blank" class="px-4 py-2 bg-amethyst-900/40 border border-amethyst-700/30 hover:bg-amethyst-900/80 text-slate-300 text-xs font-bold rounded-lg transition-colors flex items-center gap-2">
+                        <i class="fa-solid fa-users"></i> BloxdHub
+                    </a>
+                    <a href="https://cipherchat-theta.base44.app" target="_blank" class="px-4 py-2 bg-amethyst-900/40 border border-amethyst-700/30 hover:bg-amethyst-900/80 text-slate-300 text-xs font-bold rounded-lg transition-colors flex items-center gap-2">
+                        <i class="fa-solid fa-comments"></i> CipherChat
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-amethyst-950 border-t border-amethyst-900/40 py-12 text-slate-400 text-sm mt-16">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8 text-left">
+                <div class="space-y-3">
+                    <h4 class="font-display font-bold tracking-wider text-slate-300 uppercase text-xs">Legal & Info</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="privacypolicy.txt" class="hover:text-amethyst-400 transition-colors">Privacy Policy</a></li>
+                        <li><a href="termsofservice.html" class="hover:text-amethyst-400 transition-colors">Terms of Service</a></li>
+                        <li><a href="sitemap.html" class="hover:text-amethyst-400 transition-colors">Sitemap</a></li>
+                    </ul>
+                </div>
+
+                <div class="space-y-3 bg-amethyst-900/20 p-4 rounded-lg border border-amethyst-800/30">
+                    <h4 class="font-display font-extrabold tracking-wider text-slate-100 uppercase text-xs">Connect With Us</h4>
+                    <ul class="space-y-2 text-xs font-medium text-slate-300">
+                        <li><a href="https://bloxdhub.com/@Entity1234" target="_blank" rel="noopener noreferrer" class="hover:text-amethyst-300 transition-colors">BloxdHub</a></li>
+                        <li><a href="https://bloxd.io" target="_blank" rel="noopener noreferrer" class="hover:text-amethyst-300 transition-colors">Bloxd.io</a></li>
+                    </ul>
+                </div>
+
+                <div class="space-y-3">
+                    <h4 class="font-display font-bold tracking-wider text-slate-300 uppercase text-xs">Navigate</h4>
+                    <p class="text-[11px] text-slate-500 leading-relaxed">
+                        Use this sitemap to explore all pages and resources available on Crystal Studios.
+                    </p>
+                </div>
+            </div>
+
+            <hr class="border-amethyst-900/40 my-6">
+
+            <div class="text-center space-y-2">
+                <span class="font-display font-bold text-xs tracking-widest text-slate-500">CRYSTAL STUDIOS</span>
+                <div class="text-[10px] text-slate-600">
+                    <p>&copy; 2026 Crystal Studios. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

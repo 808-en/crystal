@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service - Crystal Studios</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        amethyst: { 400: '#c191f2', 500: '#9d4edd', 600: '#8b3ec4', 700: '#722da1', 800: '#5a189a', 900: '#3c096c', 950: '#10051d' }
+                    },
+                    fontFamily: { sans: ['Inter', 'sans-serif'], display: ['Space Grotesk', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #10051d; }
+        ::-webkit-scrollbar-thumb { background: #5a189a; border-radius: 3px; }
+    </style>
+</head>
+<body class="bg-amethyst-950 text-slate-100 font-sans min-h-screen flex flex-col">
+
+    <header class="sticky top-0 z-50 backdrop-blur-md bg-amethyst-950/80 border-b border-amethyst-900/40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-20">
+            <div class="flex items-center gap-3 cursor-pointer" onclick="window.location.href='index.html'">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amethyst-500 to-amethyst-900 flex items-center justify-center shadow-lg shadow-amethyst-500/20">
+                    <i class="fa-solid fa-gem text-lg text-white"></i>
+                </div>
+                <div>
+                    <span class="font-display font-bold text-lg tracking-wider">CRYSTAL</span>
+                    <p class="text-[9px] text-amethyst-400 uppercase tracking-widest font-semibold">STUDIOS</p>
+                </div>
+            </div>
+
+            <nav class="hidden md:flex items-center gap-1">
+                <a href="index.html" class="px-3 py-2 text-sm font-medium text-slate-300 hover:text-white">Home</a>
+                <a href="termsofservice.html" class="px-3 py-2 text-sm font-medium text-amethyst-400 border-b-2 border-amethyst-400">Terms of Service</a>
+            </nav>
+
+            <button onclick="window.history.back()" class="md:hidden p-2 text-slate-400">
+                <i class="fa-solid fa-arrow-left text-xl"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        <section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Page Title -->
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <h1 class="font-display font-extrabold text-4xl sm:text-5xl text-white mb-4">Terms of Service</h1>
+                <p class="text-slate-300 text-lg">Please review our terms and conditions carefully.</p>
+            </div>
+
+            <!-- Technology Stack Section -->
+            <div class="bg-amethyst-900/10 border border-amethyst-900/40 rounded-2xl p-8 shadow-lg mb-12">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-12 h-12 rounded-xl bg-amethyst-600/20 flex items-center justify-center">
+                        <i class="fa-solid fa-code text-xl text-amethyst-400"></i>
+                    </div>
+                    <h2 class="font-display font-bold text-2xl text-white">Codebase Composition</h2>
+                </div>
+                <p class="text-slate-300 mb-6">Crystal Studios website is built with modern, efficient technologies:</p>
+                <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+                    <div class="bg-amethyst-950/50 border border-amethyst-900/40 rounded-xl p-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <div class="flex items-center gap-2">
+                                <i class="fa-brands fa-html5 text-2xl text-orange-500"></i>
+                                <span class="font-semibold text-slate-300">HTML</span>
+                            </div>
+                            <span class="text-lg font-bold text-amethyst-400">71.6%</span>
+                        </div>
+                        <div class="w-full bg-amethyst-900/50 rounded-full h-2">
+                            <div class="bg-orange-500 h-2 rounded-full" style="width: 71.6%"></div>
+                        </div>
+                        <p class="text-xs text-slate-400 mt-2">Markup & Structure</p>
+                    </div>
+
+                    <div class="bg-amethyst-950/50 border border-amethyst-900/40 rounded-xl p-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <div class="flex items-center gap-2">
+                                <i class="fa-brands fa-js text-2xl text-yellow-400"></i>
+                                <span class="font-semibold text-slate-300">JavaScript</span>
+                            </div>
+                            <span class="text-lg font-bold text-amethyst-400">28.4%</span>
+                        </div>
+                        <div class="w-full bg-amethyst-900/50 rounded-full h-2">
+                            <div class="bg-yellow-400 h-2 rounded-full" style="width: 28.4%"></div>
+                        </div>
+                        <p class="text-xs text-slate-400 mt-2">Interactivity & Logic</p>
+                    </div>
+
+                    <div class="bg-amethyst-950/50 border border-amethyst-900/40 rounded-xl p-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <div class="flex items-center gap-2">
+                                <i class="fa-brands fa-css3-alt text-2xl text-cyan-400"></i>
+                                <span class="font-semibold text-slate-300">CSS</span>
+                            </div>
+                            <span class="text-lg font-bold text-amethyst-400">0.0%*</span>
+                        </div>
+                        <div class="w-full bg-amethyst-900/50 rounded-full h-2">
+                            <div class="bg-cyan-400 h-2 rounded-full" style="width: 0%"></div>
+                        </div>
+                        <p class="text-xs text-slate-400 mt-2">Via Tailwind Framework</p>
+                    </div>
+                </div>
+                <p class="text-xs text-slate-500 mt-6 italic">* CSS is handled through Tailwind CSS utility classes within HTML elements, not as separate stylesheet files. This accounts for the 0% discrete CSS percentage.</p>
+            </div>
+
+            <!-- Terms Content -->
+            <div class="space-y-6">
+                <!-- Section 1 -->
+                <div class="bg-amethyst-900/10 border border-amethyst-900/40 rounded-2xl p-8 shadow-lg">
+                    <h3 class="font-display font-bold text-xl text-white mb-4">1. Acceptance of Terms</h3>
+                    <p class="text-slate-300 leading-relaxed">
+                        By accessing and using the Crystal Studios website, you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to abide by the above, please do not use this service.
+                    </p>
+                </div>
+
+                <!-- Section 2 -->
+                <div class="bg-amethyst-900/10 border border-amethyst-900/40 rounded-2xl p-8 shadow-lg">
+                    <h3 class="font-display font-bold text-xl text-white mb-4">2. Use License</h3>
+                    <p class="text-slate-300 leading-relaxed mb-3">
+                        Permission is granted to temporarily download one copy of the materials (information or software) on Crystal Studios' website for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title, and under this license you may not:
+                    </p>
+                    <ul class="text-slate-300 space-y-2 ml-6 list-disc">
+                        <li>Modify or copy the materials</li>
+                        <li>Use the materials for any commercial purpose or for any public display</li>
+                        <li>Attempt to decompile or reverse engineer any software contained on the website</li>
+                        <li>Remove any copyright or other proprietary notations from the materials</li>
+                        <li>Transfer the materials to another person or "mirror" the materials on any other server</li>
+                    </ul>
+                </div>
+
+                <!-- Section 3 -->
+                <div class="bg-amethyst-900/10 border border-amethyst-900/40 rounded-2xl p-8 shadow-lg">
+                    <h3 class="font-display font-bold text-xl text-white mb-4">3. Disclaimer</h3>
+                    <p class="text-slate-300 leading-relaxed">
+                        The materials on Crystal Studios' website are provided on an 'as is' basis. Crystal Studios makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights.
+                    </p>
+                </div>
+
+                <!-- Section 4 -->
+                <div class="bg-amethyst-900/10 border border-amethyst-900/40 rounded-2xl p-8 shadow-lg">
+                    <h3 class="font-display font-bold text-xl text-white mb-4">4. Limitations</h3>
+                    <p class="text-slate-300 leading-relaxed">
+                        In no event shall Crystal Studios or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption,) arising out of the use or inability to use the materials on Crystal Studios' website, even if Crystal Studios or an authorized representative has been notified orally or in writing of the possibility of such damage.
+                    </p>
+                </div>
+
+                <!-- Section 5 -->
+                <div class="bg-amethyst-900/10 border border-amethyst-900/40 rounded-2xl p-8 shadow-lg">
+                    <h3 class="font-display font-bold text-xl text-white mb-4">5. Accuracy of Materials</h3>
+                    <p class="text-slate-300 leading-relaxed">
+                        The materials appearing on Crystal Studios' website could include technical, typographical, or photographic errors. Crystal Studios does not warrant that any of the materials on its website are accurate, complete, or current. Crystal Studios may make changes to the materials contained on its website at any time without notice.
+                    </p>
+                </div>
+
+                <!-- Section 6 -->
+                <div class="bg-amethyst-900/10 border border-amethyst-900/40 rounded-2xl p-8 shadow-lg">
+                    <h3 class="font-display font-bold text-xl text-white mb-4">6. External Links</h3>
+                    <p class="text-slate-300 leading-relaxed">
+                        Crystal Studios has not reviewed all of the sites linked to its website and is not responsible for the contents of any such linked site. The inclusion of any link does not imply endorsement by Crystal Studios of the site. Use of any such linked website is at the user's own risk.
+                    </p>
+                </div>
+
+                <!-- Section 7 -->
+                <div class="bg-amethyst-900/10 border border-amethyst-900/40 rounded-2xl p-8 shadow-lg">
+                    <h3 class="font-display font-bold text-xl text-white mb-4">7. Modifications</h3>
+                    <p class="text-slate-300 leading-relaxed">
+                        Crystal Studios may revise these terms of service for its website at any time without notice. By using this website, you are agreeing to be bound by the then current version of these terms of service.
+                    </p>
+                </div>
+
+                <!-- Section 8 -->
+                <div class="bg-amethyst-900/10 border border-amethyst-900/40 rounded-2xl p-8 shadow-lg">
+                    <h3 class="font-display font-bold text-xl text-white mb-4">8. Governing Law</h3>
+                    <p class="text-slate-300 leading-relaxed">
+                        These terms and conditions are governed by and construed in accordance with the laws of the jurisdiction in which Crystal Studios operates, and you irrevocably submit to the exclusive jurisdiction of the courts in that location.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Links Section -->
+            <div class="mt-12 flex gap-3 flex-wrap justify-center">
+                <a href="privacypolicy.txt" class="px-4 py-2 bg-amethyst-600 hover:bg-amethyst-500 text-white text-xs font-bold rounded-lg transition-colors flex items-center gap-2">
+                    <i class="fa-solid fa-shield"></i> Privacy Policy
+                </a>
+                <a href="termsofuse.txt" class="px-4 py-2 bg-amethyst-900/40 border border-amethyst-700/30 hover:bg-amethyst-900/80 text-slate-300 text-xs font-bold rounded-lg transition-colors flex items-center gap-2">
+                    <i class="fa-solid fa-file-contract"></i> Terms of Use
+                </a>
+                <a href="index.html" class="px-4 py-2 bg-amethyst-900/40 border border-amethyst-700/30 hover:bg-amethyst-900/80 text-slate-300 text-xs font-bold rounded-lg transition-colors flex items-center gap-2">
+                    <i class="fa-solid fa-arrow-left"></i> Back to Home
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-amethyst-950 border-t border-amethyst-900/40 py-12 text-slate-400 text-sm mt-16">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8 text-left">
+                <div class="space-y-3">
+                    <h4 class="font-display font-bold tracking-wider text-slate-300 uppercase text-xs">Legal & Info</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="privacypolicy.txt" class="hover:text-amethyst-400 transition-colors">Privacy Policy</a></li>
+                        <li><a href="termsofservice.html" class="hover:text-amethyst-400 transition-colors">Terms of Service</a></li>
+                        <li><a href="info.html" class="hover:text-amethyst-400 transition-colors">Information</a></li>
+                    </ul>
+                </div>
+
+                <div class="space-y-3 bg-amethyst-900/20 p-4 rounded-lg border border-amethyst-800/30">
+                    <h4 class="font-display font-extrabold tracking-wider text-slate-100 uppercase text-xs">Connect With Us</h4>
+                    <ul class="space-y-2 text-xs font-medium text-slate-300">
+                        <li><a href="https://bloxdhub.com/@Entity1234" target="_blank" rel="noopener noreferrer" class="hover:text-amethyst-300 transition-colors">BloxdHub</a></li>
+                        <li><a href="https://bloxd.io" target="_blank" rel="noopener noreferrer" class="hover:text-amethyst-300 transition-colors">Bloxd.io</a></li>
+                    </ul>
+                </div>
+
+                <div class="space-y-3">
+                    <h4 class="font-display font-bold tracking-wider text-slate-300 uppercase text-xs">About</h4>
+                    <p class="text-[11px] text-slate-500 leading-relaxed">
+                        Crystal Studios creates premium Bloxd.io experiences with innovative design and exceptional teamwork.
+                    </p>
+                </div>
+            </div>
+
+            <hr class="border-amethyst-900/40 my-6">
+
+            <div class="text-center space-y-2">
+                <span class="font-display font-bold text-xs tracking-widest text-slate-500">CRYSTAL STUDIOS</span>
+                <div class="text-[10px] text-slate-600">
+                    <p>&copy; 2026 Crystal Studios. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
