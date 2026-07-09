@@ -206,7 +206,7 @@ function generateWorldCodeBlock() {
     if (index > -1) SITE_DATA.worlds[index] = obj;
     else SITE_DATA.worlds.push(obj);
 
-    triggerToast("Lobby updated in memory! Click 'Generate data.js Code' to get your final file.", "success");
+    triggerToast("Lobby updated in memory! Click 'Generate data.json Code' to get your final file.", "success");
 }
 
 function generateDataFileCode() {
