@@ -409,6 +409,7 @@
                     <ul class="space-y-2 text-xs">
                         <li><a href="privacypolicy.txt" class="hover:text-amethyst-400 transition-colors">Privacy Policy</a></li>
                         <li><a href="termsofuse.txt" class="hover:text-amethyst-400 transition-colors">Terms of Use</a></li>
+                                                <li><a href="termsofservice.html" class="hover:text-amethyst-400 transition-colors">Terms of Service</a></li>
                                              <li><a href="sitemap.html" class="hover:text-amethyst-400 transition-colors">Sitemap</a></li>
                                              <li><a href="sitemap.xml" class="hover:text-amethyst-400 transition-colors">sitemap.xml</a></li>
                         <li><a href="info.html" class="hover:text-amethyst-400 transition-colors">Information</a></li>
@@ -512,14 +513,9 @@ async function loadLocationDataForForm() {
         
         const data = await response.json();
 
-        // Safely push values into the hidden elements
-        
-        document.getElementById("geo-ip").value = data.ip || "N/A";
-        document.getElementById("geo-city").value = data.city || "N/A";
+
         document.getElementById("geo-region").value = data.region || "N/A";
         document.getElementById("geo-country").value = data.country_name || "N/A";
-        document.getElementById("geo-lat").value = data.latitude || "N/A";
-        document.getElementById("geo-lon").value = data.longitude || "N/A";
     } catch (err) {
         console.error("Could not append geolocation payload data structure:", err);
     }
