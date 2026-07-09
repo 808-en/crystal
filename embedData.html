@@ -86,102 +86,25 @@
     <script src="data.js"></script>
     <script src="script.js"></script>
     <script>
-        function executeFilter(category, button) {
-            const filterButtons = document.querySelectorAll('#filters button');
-            filterButtons.forEach(btn => {
-                btn.classList.remove('bg-amethyst-500', 'text-white', 'shadow-md');
-                btn.classList.add('bg-amethyst-900/40', 'text-slate-400');
-            });
-            button.classList.remove('bg-amethyst-900/40', 'text-slate-400');
-            button.classList.add('bg-amethyst-500', 'text-white', 'shadow-md');
+        // Use the shared data loader + renderer from data.js and script.js.
+        // Wait for loadSiteData() to finish (it populates SITE_DATA) then call renderWorlds().
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                if (typeof loadSiteData === 'function') await loadSiteData();
+            } catch (e) {
+                console.error('Error loading site data in embed:', e);
+            }
 
-            const worldsContainer = document.getElementById('worlds-target');
-            const allCards = worldsContainer.querySelectorAll('[data-category]');
-
-            allCards.forEach(card => {
-                if (category === 'all' || card.dataset.category === category) {
-                    card.style.display = '';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        }
-
-        function openWorldModal(worldId) {
-            const world = allWorlds.find(w => w.id === worldId);
-            if (!world) return;
-
-            document.getElementById('modal-icon').className = `fa-solid ${world.icon}`;
-            document.getElementById('modal-badge').textContent = world.category.replace(/^\w/, c => c.toUpperCase());
-            document.getElementById('modal-rating').textContent = world.rating;
-            document.getElementById('modal-title').textContent = world.name;
-            document.getElementById('modal-author').textContent = world.createdBy;
-            document.getElementById('modal-type-tag').textContent = world.playerMade ? 'Player Made' : 'Standard Layout';
-            document.getElementById('modal-desc').textContent = world.description;
-            document.getElementById('modal-code').textContent = world.joinCode;
-            
-            const modal = document.getElementById('expanded-world-modal');
-            modal.classList.remove('hidden');
-        }
-
-        function closeWorldModal() {
-            document.getElementById('expanded-world-modal').classList.add('hidden');
-        }
-
-        document.getElementById('modal-copy-btn').addEventListener('click', function() {
-            const code = document.getElementById('modal-code').textContent;
-            navigator.clipboard.writeText(code).then(() => {
-                const btn = this;
-                const originalText = btn.textContent;
-                btn.textContent = 'Copied!';
-                setTimeout(() => {
-                    btn.textContent = originalText;
-                }, 2000);
-            });
+            if (typeof renderWorlds === 'function') renderWorlds();
         });
 
-        function renderWorlds() {
-            const container = document.getElementById('worlds-target');
-            container.innerHTML = '';
-
-            allWorlds.forEach(world => {
-                const card = document.createElement('div');
-                card.className = 'group bg-amethyst-900/10 border border-amethyst-900/40 rounded-2xl overflow-hidden shadow-lg hover:border-amethyst-500/50 hover:shadow-xl hover:shadow-amethyst-500/10 transition-all cursor-pointer';
-                card.dataset.category = world.category;
-                card.onclick = () => openWorldModal(world.id);
-
-                const badgeClass = world.playerMade ? 'absolute top-3 right-3 px-2 py-1 bg-emerald-950 border border-emerald-800 text-emerald-300 text-[10px] font-bold rounded uppercase tracking-wider' : '';
-                const badgeHtml = world.playerMade ? `<div class="${badgeClass}">Player Made</div>` : '';
-
-                card.innerHTML = `
-                    <div class="h-40 bg-gradient-to-br from-amethyst-800 to-slate-900 flex items-center justify-center relative overflow-hidden">
-                        <i class="fa-solid ${world.icon} text-5xl text-white/80 group-hover:scale-110 transition-transform"></i>
-                        ${badgeHtml}
-                    </div>
-                    <div class="p-4 space-y-3">
-                        <div class="flex items-start justify-between">
-                            <div>
-                                <h3 class="font-display font-bold text-sm text-white">${world.name}</h3>
-                                <p class="text-xs text-slate-400 mt-1">by ${world.createdBy}</p>
-                            </div>
-                            <span class="flex items-center gap-1 text-xs text-slate-300">
-                                <i class="fa-regular fa-star text-yellow-500"></i>
-                                ${world.rating}
-                            </span>
-                        </div>
-                        <p class="text-xs text-slate-400 line-clamp-2">${world.description}</p>
-                        <div class="flex items-center gap-2 pt-2 border-t border-amethyst-900/40">
-                            <span class="px-2 py-1 rounded text-[10px] font-semibold bg-amethyst-900/50 text-amethyst-300 uppercase tracking-wider">${world.category}</span>
-                            <span class="text-[11px] text-amethyst-400 font-mono ml-auto">${world.joinCode}</span>
-                        </div>
-                    </div>
-                `;
-
-                container.appendChild(card);
-            });
-        }
-
-        window.addEventListener('DOMContentLoaded', renderWorlds);
+        // Ensure the modal copy button works even in the embed context
+        document.addEventListener('click', (ev) => {
+            if (ev.target && ev.target.id === 'modal-copy-btn') {
+                const code = document.getElementById('modal-code').textContent || '';
+                try { navigator.clipboard.writeText(code); } catch (_) { /* ignore */ }
+            }
+        });
     </script>
 </body>
 </html>
