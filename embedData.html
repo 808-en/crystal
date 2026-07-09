@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crystal Studios - Lobbies</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        amethyst: { 400: '#c191f2', 500: '#9d4edd', 600: '#8b3ec4', 700: '#722da1', 800: '#5a189a', 900: '#3c096c', 950: '#10051d' }
+                    },
+                    fontFamily: { sans: ['Inter', 'sans-serif'], display: ['Space Grotesk', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #10051d; }
+        ::-webkit-scrollbar-thumb { background: #5a189a; border-radius: 3px; }
+        .active-tab { color: #c191f2 !important; border-bottom: 2px solid #9d4edd; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-amethyst-950 text-slate-100 font-sans min-h-screen flex flex-col">
+
+    <main class="flex-grow py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <section class="py-12">
+            <div class="text-center max-w-xl mx-auto mb-12">
+                <h2 class="font-display font-bold text-3xl text-white">Our Lobbies</h2>
+                <p class="text-slate-400 text-sm mt-2">Explore our custom multiplayer game environments in Bloxd.io.</p>
+            </div>
+
+            <div id="filters" class="flex flex-wrap gap-2 mb-8 justify-center">
+                <button onclick="executeFilter('all', this)" class="px-3 py-1.5 text-xs font-bold rounded-lg bg-amethyst-500 text-white shadow-md">All Worlds</button>
+                <button onclick="executeFilter('pvp', this)" class="px-3 py-1.5 text-xs font-bold rounded-lg bg-amethyst-900/40 text-slate-400 hover:text-white">PvP Arena</button>
+                <button onclick="executeFilter('parkour', this)" class="px-3 py-1.5 text-xs font-bold rounded-lg bg-amethyst-900/40 text-slate-400 hover:text-white">Parkour</button>
+                <button onclick="executeFilter('adventure', this)" class="px-3 py-1.5 text-xs font-bold rounded-lg bg-amethyst-900/40 text-slate-400 hover:text-white">Adventure</button>
+                <button onclick="executeFilter('survival', this)" class="px-3 py-1.5 text-xs font-bold rounded-lg bg-amethyst-900/40 text-slate-400 hover:text-white">Survival</button>
+                <button onclick="executeFilter('minigames', this)" class="px-3 py-1.5 text-xs font-bold rounded-lg bg-amethyst-900/40 text-slate-400 hover:text-white">Minigames</button>
+                <button onclick="executeFilter('other', this)" class="px-3 py-1.5 text-xs font-bold rounded-lg bg-amethyst-900/40 text-slate-400 hover:text-white">Other</button>
+            </div>
+
+            <div id="worlds-target" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </section>
+    </main>
+
+    <div id="expanded-world-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md hidden transition-all">
+        <div class="bg-amethyst-950 border border-amethyst-900 rounded-2xl max-w-lg w-full relative mx-4 overflow-hidden shadow-2xl flex flex-col">
+            <div id="modal-gradient-header" class="h-32 bg-gradient-to-br from-amethyst-800 to-slate-900 relative flex items-center justify-center">
+                <i id="modal-icon" class="fa-solid fa-cubes text-5xl text-white/90"></i>
+                <button onclick="closeWorldModal()" class="absolute top-4 right-4 bg-black/40 hover:bg-black/70 p-2 rounded-full text-slate-300 hover:text-white transition-colors">
+                    <i class="fa-solid fa-xmark text-sm"></i>
+                </button>
+            </div>
+            <div class="p-6 space-y-4">
+                <div class="flex items-center justify-between">
+                    <span id="modal-badge" class="px-2.5 py-0.5 rounded text-xs font-bold uppercase tracking-wider bg-amethyst-900 text-amethyst-300">Category</span>
+                    <span class="text-sm text-slate-300 font-medium flex items-center gap-1"><i class="fa-regular fa-star text-yellow-500"></i> <span id="modal-rating">5.0</span>/5 Rating</span>
+                </div>
+                <h3 id="modal-title" class="font-display font-bold text-2xl text-white">Lobby Title</h3>
+                <div class="grid grid-cols-2 gap-2 text-xs bg-amethyst-900/20 p-3 rounded-xl border border-amethyst-900/40">
+                    <p class="text-slate-400">Created By: <span id="modal-author" class="text-white font-semibold">Unknown</span></p>
+                    <p class="text-slate-400">Profile Tag: <span id="modal-type-tag" class="text-amethyst-400 font-bold">Standard Layout</span></p>
+                </div>
+                <div class="space-y-1">
+                    <h4 class="text-[10px] font-bold tracking-wider uppercase text-amethyst-400">Full Workspace Description</h4>
+                    <p id="modal-desc" class="text-slate-300 text-sm leading-relaxed">Detailed summary text context placeholder description fields.</p>
+                </div>
+                <div class="bg-amethyst-950 border border-amethyst-900 p-3 rounded-xl flex items-center justify-between mt-4">
+                    <code id="modal-code" class="text-sm font-mono text-amethyst-300 select-all">/join code</code>
+                    <button id="modal-copy-btn" class="px-4 py-1.5 bg-amethyst-600 hover:bg-amethyst-500 text-xs font-bold rounded-xl text-white transition-colors">Copy</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+    <script>
+        function executeFilter(category, button) {
+            const filterButtons = document.querySelectorAll('#filters button');
+            filterButtons.forEach(btn => {
+                btn.classList.remove('bg-amethyst-500', 'text-white', 'shadow-md');
+                btn.classList.add('bg-amethyst-900/40', 'text-slate-400');
+            });
+            button.classList.remove('bg-amethyst-900/40', 'text-slate-400');
+            button.classList.add('bg-amethyst-500', 'text-white', 'shadow-md');
+
+            const worldsContainer = document.getElementById('worlds-target');
+            const allCards = worldsContainer.querySelectorAll('[data-category]');
+
+            allCards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function openWorldModal(worldId) {
+            const world = allWorlds.find(w => w.id === worldId);
+            if (!world) return;
+
+            document.getElementById('modal-icon').className = `fa-solid ${world.icon}`;
+            document.getElementById('modal-badge').textContent = world.category.replace(/^\w/, c => c.toUpperCase());
+            document.getElementById('modal-rating').textContent = world.rating;
+            document.getElementById('modal-title').textContent = world.name;
+            document.getElementById('modal-author').textContent = world.createdBy;
+            document.getElementById('modal-type-tag').textContent = world.playerMade ? 'Player Made' : 'Standard Layout';
+            document.getElementById('modal-desc').textContent = world.description;
+            document.getElementById('modal-code').textContent = world.joinCode;
+            
+            const modal = document.getElementById('expanded-world-modal');
+            modal.classList.remove('hidden');
+        }
+
+        function closeWorldModal() {
+            document.getElementById('expanded-world-modal').classList.add('hidden');
+        }
+
+        document.getElementById('modal-copy-btn').addEventListener('click', function() {
+            const code = document.getElementById('modal-code').textContent;
+            navigator.clipboard.writeText(code).then(() => {
+                const btn = this;
+                const originalText = btn.textContent;
+                btn.textContent = 'Copied!';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                }, 2000);
+            });
+        });
+
+        function renderWorlds() {
+            const container = document.getElementById('worlds-target');
+            container.innerHTML = '';
+
+            allWorlds.forEach(world => {
+                const card = document.createElement('div');
+                card.className = 'group bg-amethyst-900/10 border border-amethyst-900/40 rounded-2xl overflow-hidden shadow-lg hover:border-amethyst-500/50 hover:shadow-xl hover:shadow-amethyst-500/10 transition-all cursor-pointer';
+                card.dataset.category = world.category;
+                card.onclick = () => openWorldModal(world.id);
+
+                const badgeClass = world.playerMade ? 'absolute top-3 right-3 px-2 py-1 bg-emerald-950 border border-emerald-800 text-emerald-300 text-[10px] font-bold rounded uppercase tracking-wider' : '';
+                const badgeHtml = world.playerMade ? `<div class="${badgeClass}">Player Made</div>` : '';
+
+                card.innerHTML = `
+                    <div class="h-40 bg-gradient-to-br from-amethyst-800 to-slate-900 flex items-center justify-center relative overflow-hidden">
+                        <i class="fa-solid ${world.icon} text-5xl text-white/80 group-hover:scale-110 transition-transform"></i>
+                        ${badgeHtml}
+                    </div>
+                    <div class="p-4 space-y-3">
+                        <div class="flex items-start justify-between">
+                            <div>
+                                <h3 class="font-display font-bold text-sm text-white">${world.name}</h3>
+                                <p class="text-xs text-slate-400 mt-1">by ${world.createdBy}</p>
+                            </div>
+                            <span class="flex items-center gap-1 text-xs text-slate-300">
+                                <i class="fa-regular fa-star text-yellow-500"></i>
+                                ${world.rating}
+                            </span>
+                        </div>
+                        <p class="text-xs text-slate-400 line-clamp-2">${world.description}</p>
+                        <div class="flex items-center gap-2 pt-2 border-t border-amethyst-900/40">
+                            <span class="px-2 py-1 rounded text-[10px] font-semibold bg-amethyst-900/50 text-amethyst-300 uppercase tracking-wider">${world.category}</span>
+                            <span class="text-[11px] text-amethyst-400 font-mono ml-auto">${world.joinCode}</span>
+                        </div>
+                    </div>
+                `;
+
+                container.appendChild(card);
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded', renderWorlds);
+    </script>
+</body>
+</html>
