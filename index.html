@@ -357,6 +357,10 @@
                             </div>
                             <textarea id="w-desc" placeholder="Lobby Profile Overview Description Text Context..." rows="3" class="w-full bg-amethyst-950 border border-amethyst-900 rounded-xl px-3 py-2 text-xs focus:outline-none text-slate-100"></textarea>
                             <button onclick="generateWorldCodeBlock()" class="w-full py-2.5 bg-amethyst-800 hover:bg-amethyst-700 text-white font-bold rounded-xl text-xs transition-all">Compile Card Changes</button>
+                            <div id="code-output-section" class="space-y-3 mt-4 bg-amethyst-950 border border-amethyst-900 p-4 rounded-xl">
+                                <label class="text-xs text-amethyst-400 font-bold uppercase tracking-wider">Detailed Instructions</label>
+                                <textarea rows="10" class="w-full bg-amethyst-900/50 border border-amethyst-800 rounded-xl px-3 py-2 text-xs font-mono text-amethyst-300 focus:outline-none" readonly><ol><li>Fill out New Lobby AND/OR New Alert form.</li><li>Press "Compile Card Changes"</li><li>Press "Generate New data.json Code"</li><li>Copy the provided code.</li><li>Admins have code-edit/collaborator access, so go to <a href="https://github.com/808-en/crystal/edit/main/data.json">GitHub data.json Page</a></li><li>Press ctrl+a and then press ctrl+v (select all + paste). You should override the entire file with the newly generated code</li><li>Press the green "Commit Changes..." button towards the top-right corner</li><li>Done! The site will be deployed again at the link within 1-3 minutes. Please wait at least 30s before re-launching the Crystal Studios page.</li></ol></textarea>
+                            </div>
                         </div>
 
                         <div class="space-y-3">
