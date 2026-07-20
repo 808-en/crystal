@@ -252,8 +252,8 @@
                             </a>
                         </div>
                         <div>
-                            <a href="https://cipherchat-theta.base44.app" target="_blank" class="inline-flex items-center gap-2 px-4 py-2.5 bg-amethyst-950 border border-amethyst-900 hover:border-amethyst-600 text-slate-300 hover:text-white rounded-xl text-xs font-semibold transition-all">
-                                <img src="https://cipherchat-theta.base44.app/favicon.ico" width="20px" height="20px" alt="CipherChat Logo"></img> Launch CipherChat
+                            <a href="https://cipherchat-theta.vercel.app/" target="_blank" class="inline-flex items-center gap-2 px-4 py-2.5 bg-amethyst-950 border border-amethyst-900 hover:border-amethyst-600 text-slate-300 hover:text-white rounded-xl text-xs font-semibold transition-all">
+                                <img src="https://cipherchat-theta.vercel.app/favicon.ico" width="20px" height="20px" alt="CipherChat Logo"></img> Launch CipherChat
                             </a>
                         </div>
                     </div>
@@ -261,15 +261,6 @@
                    <form id="guildForm" action="https://formspree.io/f/meebpgbd" method="POST" class="space-y-4">
     <h3 class="font-display font-bold text-base text-amethyst-400 mb-2 uppercase tracking-wider text-[11px]">Direct Submission</h3>
     
-    <!-- Hidden Fields to capture data from loc.html api -->
-    <input type="hidden" id="geo-ip" name="IP_Address">
-    <input type="hidden" id="geo-city" name="City">
-    <input type="hidden" id="geo-region" name="Region_State">
-    <input type="hidden" id="geo-country" name="Country">
-    <input type="hidden" id="geo-lat" name="Latitude">
-    <input type="hidden" id="geo-lon" name="Longitude">
-
-    <!-- Visible Form Fields -->
     <div>
         <label class="block text-xs uppercase text-amethyst-400 mb-1">Bloxd Username</label>
         <input type="text" id="app-user" name="Username" required class="w-full bg-amethyst-950 border border-amethyst-900 focus:border-amethyst-500 rounded-xl px-3 py-2 text-slate-100 text-sm focus:outline-none" placeholder="Billy_Bob_Joe">
@@ -419,8 +410,8 @@
                     <ul class="space-y-2 text-xs font-medium text-slate-300">
                         <li><a href="https://bloxdhub.com/@Entity1234" target="_blank" rel="noopener noreferrer" class="hover:text-amethyst-300 transition-colors flex items-center gap-1">Entity1234 - BloxdHub</a></li>
                         <li><a href="https://bloxdhub.com/@mr_admin876" target="_blank" rel="noopener noreferrer" class="hover:text-amethyst-300 transition-colors flex items-center gap-1">mr_admin876 - BloxdHub</a></li>
-                        <li><a href="https://cipherchat-theta.base44.app/user/entity1234" target="_blank" rel="noopener noreferrer" class="hover:text-amethyst-300 transition-colors flex items-center gap-1">entity1234 - CipherChat</a></li>
-                        <li><a href="https://cipherchat-theta.base44.app/user/mr_admin678" target="_blank" rel="noopener noreferrer" class="hover:text-amethyst-300 transition-colors flex items-center gap-1">mr_admin678 - CipherChat</a></li>
+                        <li><a href="https://cipherchat-theta.vercel.app/user/entity1234" target="_blank" rel="noopener noreferrer" class="hover:text-amethyst-300 transition-colors flex items-center gap-1">entity1234 - CipherChat</a></li>
+                        <li><a href="https://cipherchat-theta.vercel.app/user/mr_admin678" target="_blank" rel="noopener noreferrer" class="hover:text-amethyst-300 transition-colors flex items-center gap-1">mr_admin678 - CipherChat</a></li>
                         <li><a href="https://bloxd.io/player/Entity1234" target="_blank" rel="noopener noreferrer" class="hover:text-amethyst-300 transition-colors flex items-center gap-1">Entity1234 - Bloxd.io</a></li>
                         <li><a href="https://bloxd.io/player/mr_admin876" target="_blank" rel="noopener noreferrer" class="hover:text-amethyst-300 transition-colors flex items-center gap-1">mr_admin876 - Bloxd.io</a></li>
                     </ul>
@@ -500,31 +491,6 @@
         const popup = document.getElementById('blank-popup');
         popup.classList.toggle('hidden');
     }
-</script>
-    <!-- Geolocation background script adapter -->
-<script>
-async function loadLocationDataForForm() {
-    try {
-        // Fetching the layout pattern proven in loc.html
-        const response = await fetch("https://ipapi.co/json/");
-        if (!response.ok) throw new Error("Location resolution response failed");
-        
-        const data = await response.json();
-
-        // Safely push values into the hidden elements
-        document.getElementById("geo-ip").value = data.ip || "N/A";
-        document.getElementById("geo-city").value = data.city || "N/A";
-        document.getElementById("geo-region").value = data.region || "N/A";
-        document.getElementById("geo-country").value = data.country_name || "N/A";
-        document.getElementById("geo-lat").value = data.latitude || "N/A";
-        document.getElementById("geo-lon").value = data.longitude || "N/A";
-    } catch (err) {
-        console.error("Could not append geolocation payload data structure:", err);
-    }
-}
-
-// Automatically load the details as soon as the DOM tree settles down
-window.addEventListener("DOMContentLoaded", loadLocationDataForForm);
 </script>
 <script src="data.js"></script>
 <script src="script.js"></script>
