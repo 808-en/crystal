@@ -29,10 +29,10 @@ function renderWorlds(dataset = SITE_DATA.worlds) {
     
     dataset.forEach(w => {
         const authorField = w.createdBy ? w.createdBy : "Crystal Studios";
-        const playerMadeBadge = w.isPlayerMade ? `<span class="absolute top-3 left-3 bg-emerald-950/80 border border-emerald-500/40 text-emerald-400 text-[9px] font-bold px-2 py-0.5 rounded-md uppercase tracking-wider"><i class="fa-solid fa-user-gear mr-1"></i>Player Made</span>` : '';
+        const playerMadeBadge = w.isPlayerMade ? `<span class="absolute top-3 left-3 bg-emerald-950/80 border border-emerald-500/40 text-emerald-400 text-[9px] font-bold px-2 py-0.5 rounded-md upp[...]
         
         container.innerHTML += `
-            <div class="bg-amethyst-900/10 border border-amethyst-900/40 rounded-2xl overflow-hidden flex flex-col justify-between hover:border-amethyst-500/50 transition-all duration-300 shadow-lg group">
+            <div class="bg-amethyst-900/10 border border-amethyst-900/40 rounded-2xl overflow-hidden flex flex-col justify-between hover:border-amethyst-500/50 transition-all duration-300 shadow-l[...]
                 <div>
                     <div class="h-36 bg-gradient-to-br ${w.gradient || 'from-amethyst-800 to-slate-900'} relative flex items-center justify-center">
                         <i class="${w.icon || 'fa-solid fa-cubes'} text-4xl text-white/80 group-hover:scale-110 transition-transform duration-300"></i>
@@ -41,7 +41,7 @@ function renderWorlds(dataset = SITE_DATA.worlds) {
                     </div>
                     <div class="p-5 space-y-3">
                         <div class="flex items-center justify-between">
-                            <span class="px-2 py-0.5 rounded text-[10px] font-semibold uppercase tracking-wider ${w.badgeColor || 'bg-amethyst-900 text-amethyst-300'}">${w.badge || w.category}</span>
+                            <span class="px-2 py-0.5 rounded text-[10px] font-semibold uppercase tracking-wider ${w.badgeColor || 'bg-amethyst-900 text-amethyst-300'}">${w.badge || w.category}</sp[...]
                             <span class="text-xs text-slate-400"><i class="fa-regular fa-star text-yellow-500 mr-1"></i>${w.rating || '5.0'}/5</span>
                         </div>
                         <h3 class="font-display font-bold text-lg text-white flex items-center justify-between">
@@ -52,12 +52,12 @@ function renderWorlds(dataset = SITE_DATA.worlds) {
                     </div>
                 </div>
                 <div class="p-5 pt-0 space-y-3">
-                    <button onclick="openWorldModal('${w.id}')" class="w-full py-1.5 bg-amethyst-900/40 border border-amethyst-800/60 hover:bg-amethyst-800/60 text-slate-300 text-xs rounded-xl font-medium transition-all flex items-center justify-center gap-1">
+                    <button onclick="openWorldModal('${w.id}')" class="w-full py-1.5 bg-amethyst-900/40 border border-amethyst-800/60 hover:bg-amethyst-800/60 text-slate-300 text-xs rounded-xl fon[...]
                         <i class="fa-solid fa-maximize text-[10px]"></i> Expand Profile Details
                     </button>
                     <div class="bg-amethyst-950 border border-amethyst-900/60 rounded-xl p-2 flex items-center justify-between">
                         <code class="text-xs font-mono text-amethyst-300 select-all">${w.joinCode}</code>
-                        <button onclick="directClipboardCopy('${w.joinCode}')" class="px-2.5 py-1 bg-amethyst-900 hover:bg-amethyst-800 text-[10px] font-semibold rounded text-slate-300 transition-colors">Copy</button>
+                        <button onclick="directClipboardCopy('${w.joinCode}')" class="px-2.5 py-1 bg-amethyst-900 hover:bg-amethyst-800 text-[10px] font-semibold rounded text-slate-300 transition-[...]
                     </div>
                 </div>
             </div>`;
@@ -206,7 +206,29 @@ function generateWorldCodeBlock() {
     if (index > -1) SITE_DATA.worlds[index] = obj;
     else SITE_DATA.worlds.push(obj);
 
-    triggerToast("Lobby updated in memory! Click 'Generate data.js Code' to get your final file.", "success");
+    // Generate detailed instructions as numbered list
+    const instructions = [
+        `Copy the entire code block below`,
+        `Open your data.json file in your code editor`,
+        `Find the "worlds" array in the existing data.json file`,
+        `Locate the entry with id: "${id}" (or add this new entry if it doesn't exist)`,
+        `Replace the entire world object with the provided code block`,
+        `Save the data.json file`,
+        `Refresh your Crystal Studios website to see the changes applied`,
+        `Test the lobby by clicking "Expand Profile Details" to verify all fields display correctly`
+    ];
+
+    const instructionsText = instructions.map((inst, idx) => `${idx + 1}. ${inst}`).join('\n');
+    const objectCode = `${JSON.stringify(obj, null, 2)}`;
+    const fullInstructions = `${instructionsText}\n\n--- WORLD OBJECT CODE ---\n\n${objectCode}`;
+
+    const outputSection = document.querySelector('#code-output-section textarea')?.parentElement || document.getElementById('code-output-section');
+    const outputTextarea = document.querySelector('#code-output-section textarea');
+
+    if (outputSection && outputTextarea) {
+        outputTextarea.value = fullInstructions;
+        triggerToast("Lobby updated in memory! Click 'Generate data.js Code' to get your final file.", "success");
+    }
 }
 
 function generateDataFileCode() {
